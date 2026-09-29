@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merasionalkan Bentuk Akar | Kelas 8</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --primary: #6d5dfc;
+    --primary-dark: #5a4ad1;
+    --secondary: #ff6b9d;
+    --accent: #4ecdc4;
+    --accent-yellow: #ffd93d;
+    --accent-orange: #ff9f43;
+    --dark: #2d3436;
+    --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-md: 0 8px 24px rgba(109, 93, 252, 0.15);
+    --shadow-lg: 0 20px 60px rgba(109, 93, 252, 0.25);
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf7 100%);
+    min-height: 100vh; color: var(--dark); line-height: 1.7; overflow-x: hidden;
+  }
+  .bg-shapes { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .shape { position: absolute; border-radius: 50%; opacity: 0.08; animation: floatShape 20s ease-in-out infinite; }
+  .shape:nth-child(1) { width: 300px; height: 300px; background: var(--primary); top: 10%; left: -100px; }
+  .shape:nth-child(2) { width: 200px; height: 200px; background: var(--secondary); top: 50%; right: -80px; animation-delay: 5s; }
+  .shape:nth-child(3) { width: 250px; height: 250px; background: var(--accent); bottom: 10%; left: 20%; animation-delay: 10s; }
+  .shape:nth-child(4) { width: 150px; height: 150px; background: var(--accent-yellow); top: 30%; right: 30%; animation-delay: 15s; }
+  @keyframes floatShape {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -30px) rotate(120deg); }
+    66% { transform: translate(-20px, 20px) rotate(240deg); }
+  }
+  .container { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; padding: 20px; }
+  .hero {
+    background: var(--gradient-1); color: #fff; border-radius: 30px;
+    padding: 50px 40px 40px; text-align: center;
+    position: relative; overflow: hidden; box-shadow: var(--shadow-lg); margin-bottom: 30px;
+  }
+  .hero::before {
+    content: ""; position: absolute; top: -50%; right: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 24px 24px; animation: drift 30s linear infinite;
+  }
+  @keyframes drift { from { transform: translate(0,0); } to { transform: translate(24px, 24px); } }
+  .hero .badge-top {
+    display: inline-block; background: rgba(255,255,255,0.25);
+    padding: 6px 18px; border-radius: 20px; font-size: 0.85em;
+    font-weight: 600; margin-bottom: 15px; backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3); position: relative;
+  }
+  .hero h1 { font-size: 2.4em; margin-bottom: 10px; position: relative; text-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+  .hero .subtitle { font-size: 1.1em; opacity: 0.95; position: relative; margin-bottom: 22px; }
+  .hero .info-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; position: relative; }
+  .info-pills span {
+    background: rgba(255,255,255,0.2); padding: 8px 18px; border-radius: 20px;
+    font-size: 0.9em; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);
+  }
+  .progress-wrap {
+    position: sticky; top: 10px; z-index: 50;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+    padding: 12px 24px; border-radius: 16px; margin-bottom: 25px;
+    box-shadow: var(--shadow-md); border: 1px solid rgba(109, 93, 252, 0.1);
+  }
+  .progress-bar { height: 8px; background: #e8ecf7; border-radius: 10px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: var(--gradient-1); border-radius: 10px; transition: width 0.4s ease; }
+  .progress-label { font-size: 0.8em; color: #718096; margin-top: 6px; text-align: right; font-weight: 600; }
+  section {
+    background: #fff; border-radius: 24px; padding: 35px 35px 30px;
+    margin-bottom: 25px; box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(109, 93, 252, 0.08);
+    position: relative; overflow: hidden; animation: fadeInUp 0.6s ease;
+  }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  section::before {
+    content: ""; position: absolute; top: 0; left: 0;
+    width: 6px; height: 100%; background: var(--gradient-1); border-radius: 6px 0 0 6px;
+  }
+  .section-title {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
+    font-size: 1.5em; color: var(--dark); font-weight: 700; letter-spacing: -0.02em;
+  }
+  .section-title .icon-circle {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 1.3em; flex-shrink: 0;
+    background: var(--gradient-1); color: #fff;
+    box-shadow: 0 6px 16px rgba(109, 93, 252, 0.3);
+  }
+  .section-title.green .icon-circle { background: var(--gradient-4); box-shadow: 0 6px 16px rgba(67, 233, 123, 0.3); }
+  .section-title.pink .icon-circle { background: var(--gradient-2); box-shadow: 0 6px 16px rgba(245, 87, 108, 0.3); }
+  .section-title.orange .icon-circle { background: var(--gradient-5); box-shadow: 0 6px 16px rgba(250, 112, 154, 0.3); }
+  .section-title.blue .icon-circle { background: var(--gradient-3); box-shadow: 0 6px 16px rgba(79, 172, 254, 0.3); }
+  p, li { font-size: 1em; color: #4a5568; }
+  ul, ol { padding-left: 24px; margin-top: 8px; }
+  li { margin-bottom: 8px; }
+  .tujuan-list { list-style: none; padding-left: 0; counter-reset: tujuan; }
+  .tujuan-list li {
+    position: relative; padding: 14px 18px 14px 60px;
+    background: linear-gradient(135deg, #f8f9fd, #eef1fb);
+    border-radius: 14px; margin-bottom: 12px;
+    counter-increment: tujuan; border-left: 4px solid var(--primary);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .tujuan-list li:hover { transform: translateX(5px); box-shadow: var(--shadow-md); }
+  .tujuan-list li::before {
+    content: counter(tujuan); position: absolute;
+    left: 16px; top: 50%; transform: translateY(-50%);
+    width: 32px; height: 32px; background: var(--gradient-1);
+    color: #fff; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9em;
+  }
+  .materi-intro {
+    background: linear-gradient(135deg, #f0f4ff, #e8f0ff);
+    border-radius: 16px; padding: 22px 24px; margin-bottom: 24px;
+    border-left: 5px solid var(--primary);
+  }
+  .materi-intro .definisi { font-size: 1.05em; line-height: 1.8; }
+  .materi-intro .definisi strong { color: var(--primary-dark); }
+  .rumus-kunci {
+    background: var(--gradient-1); color: #fff;
+    padding: 22px; border-radius: 16px; text-align: center;
+    margin: 18px 0; font-family: 'Cambria Math', 'Times New Roman', serif;
+    font-size: 1.5em; box-shadow: 0 8px 24px rgba(109, 93, 252, 0.35);
+    position: relative; overflow: hidden;
+  }
+  .rumus-kunci::before { content: "🔑"; position: absolute; top: 10px; right: 15px; font-size: 0.7em; opacity: 0.6; }
+  .rumus-kunci .label {
+    display: block; font-size: 0.55em; font-family: 'Segoe UI', sans-serif;
+    opacity: 0.9; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .bentuk-card {
+    background: #fff; border-radius: 18px; margin-bottom: 16px;
+    border: 2px solid #eef1fb; overflow: hidden;
+    box-shadow: var(--shadow-sm); transition: all 0.3s;
+  }
+  .bentuk-card:hover { border-color: rgba(109, 93, 252, 0.3); }
+  .bentuk-card.open { box-shadow: var(--shadow-md); border-color: var(--primary); }
+  .bentuk-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 18px 22px; cursor: pointer; user-select: none;
+    background: linear-gradient(135deg, #f8f9fd, #f0f4ff); transition: background 0.3s;
+  }
+  .bentuk-header:hover { background: linear-gradient(135deg, #eef1fb, #e0e8ff); }
+  .bentuk-card.open .bentuk-header { background: var(--gradient-1); color: #fff; }
+  .bentuk-card.open .bentuk-header .judul { color: #fff; }
+  .bentuk-card.open .bentuk-header .arrow { color: #fff; }
+  .bentuk-header .label-bentuk {
+    background: var(--gradient-1); color: #fff; font-size: 0.75em; font-weight: 700;
+    padding: 5px 14px; border-radius: 20px; flex-shrink: 0;
+    letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .bentuk-card.open .bentuk-header .label-bentuk {
+    background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.5);
+  }
+  .bentuk-header .judul { flex: 1; font-weight: 600; color: var(--dark); font-size: 1em; }
+  .bentuk-header .arrow { color: var(--primary); font-size: 1.1em; transition: transform 0.3s; font-weight: 700; }
+  .bentuk-card.open .bentuk-header .arrow { transform: rotate(180deg); }
+  .bentuk-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.3s; padding: 0 22px; }
+  .bentuk-card.open .bentuk-body { max-height: 1600px; padding: 22px; border-top: 2px dashed #eef1fb; }
+  .langkah { counter-reset: step; list-style: none; padding-left: 0; }
+  .langkah li {
+    position: relative; padding-left: 44px; margin-bottom: 12px;
+    line-height: 1.7; color: #4a5568;
+  }
+  .langkah li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 2px;
+    width: 30px; height: 30px; background: var(--gradient-1);
+    color: #fff; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85em; font-weight: 700;
+  }
+  .rumus-display {
+    background: linear-gradient(135deg, #f0f4ff, #e8f0ff);
+    border: 2px solid rgba(109, 93, 252, 0.2);
+    border-radius: 16px; padding: 24px 20px; margin: 18px 0;
+    text-align: center; font-family: 'Cambria Math', 'Times New Roman', serif;
+    font-size: 1.3em; display: flex; align-items: center;
+    justify-content: center; flex-wrap: wrap; gap: 12px; line-height: 1.8;
+  }
+  .rumus-display .frac, .frac {
+    display: inline-flex; flex-direction: column;
+    vertical-align: middle; text-align: center; margin: 0 6px; align-items: center;
+  }
+  .rumus-display .frac .num, .frac .num {
+    display: block; border-bottom: 2px solid currentColor;
+    padding: 2px 10px 4px; line-height: 1.2;
+  }
+  .rumus-display .frac .den, .frac .den {
+    display: block; padding: 4px 10px 2px; line-height: 1.2;
+  }
+  .rumus-display .op { font-size: 1.2em; font-weight: 700; color: var(--primary); }
+  .rumus-display .eq { font-size: 1.3em; font-weight: 700; color: var(--primary-dark); }
+  .contoh-block {
+    background: linear-gradient(135deg, #fffaf0, #fff5e6);
+    border: 2px solid #ffe0b2; border-radius: 16px; padding: 20px 22px; margin-top: 20px;
+  }
+  .contoh-block .contoh-title {
+    font-weight: 700; color: #c05621; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px; font-size: 1.05em;
+  }
+  .contoh-block .contoh-title .badge {
+    background: var(--gradient-5); color: #fff;
+    font-size: 0.7em; padding: 4px 12px; border-radius: 12px;
+    font-weight: 700; letter-spacing: 0.5px;
+  }
+  .contoh-step {
+    background: #fff; border-radius: 12px; padding: 14px 18px; margin: 10px 0;
+    font-family: 'Cambria Math', 'Times New Roman', serif;
+    font-size: 1.05em; line-height: 1.9; border-left: 4px solid var(--accent-orange);
+  }
+  .contoh-step .ket {
+    font-family: 'Segoe UI', sans-serif; font-size: 0.8em;
+    color: #718096; display: block; margin-bottom: 6px; font-weight: 600;
+  }
+  .hasil-akhir {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    padding: 14px 20px; border-radius: 12px; margin-top: 12px;
+    font-weight: 700; color: #fff; font-family: 'Cambria Math', 'Times New Roman', serif;
+    font-size: 1.15em; box-shadow: 0 6px 16px rgba(67, 233, 123, 0.3); text-align: center;
+  }
+  .kehidupan { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 12px; }
+  .kartu {
+    background: #fff; border-radius: 18px; padding: 22px 18px;
+    box-shadow: var(--shadow-sm); border: 2px solid #eef1fb;
+    transition: all 0.3s; text-align: center; cursor: default;
+  }
+  .kartu:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+  .kartu .emoji { font-size: 2.2em; display: block; margin-bottom: 10px; }
+  .kartu h4 { color: var(--primary-dark); margin-bottom: 6px; font-size: 1em; }
+  .kartu p { font-size: 0.88em; color: #718096; }
+  .rangkuman-section::before { background: var(--gradient-3); }
+  .rangkuman-intro {
+    background: linear-gradient(135deg, #e0f7fa, #e6f9ff);
+    border-left: 5px solid var(--accent); border-radius: 14px;
+    padding: 16px 20px; margin-bottom: 20px; font-size: 0.98em;
+  }
+  .rangkuman-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px; }
+  .rangkuman-item {
+    background: linear-gradient(135deg, #f8f9fd, #f0f4ff);
+    border-radius: 16px; padding: 18px 20px;
+    border-left: 5px solid var(--primary); transition: transform 0.2s;
+  }
+  .rangkuman-item:hover { transform: translateX(4px); }
+  .rangkuman-item strong { color: var(--primary-dark); display: block; margin-bottom: 6px; font-size: 0.95em; }
+  .rangkuman-item p { font-size: 0.95em; }
+  .soal {
+    background: #fff; border-radius: 18px; padding: 24px 26px;
+    margin-bottom: 18px; box-shadow: var(--shadow-sm);
+    border: 2px solid #eef1fb; transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .soal::before {
+    content: ""; position: absolute; top: 0; left: 0;
+    width: 100%; height: 5px; background: var(--gradient-1);
+  }
+  .soal:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .soal-num {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-bottom: 14px; font-size: 0.85em; font-weight: 700;
+    color: var(--primary); text-transform: uppercase; letter-spacing: 1px;
+  }
+  .soal-num .num-circle {
+    width: 30px; height: 30px; background: var(--gradient-1);
+    color: #fff; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;
+  }
+  .soal-pertanyaan { font-weight: 600; font-size: 1.05em; color: var(--dark); margin-bottom: 18px; line-height: 1.7; }
+  .soal label { display: block; font-size: 0.88em; font-weight: 700; color: #4a5568; margin-bottom: 6px; margin-top: 14px; }
+  .soal label .wajib { color: #c53030; }
+  .soal input[type="text"] {
+    width: 100%; padding: 12px 16px; border: 2px solid #e8ecf7;
+    border-radius: 12px; font-size: 1em;
+    font-family: 'Cambria Math', 'Times New Roman', serif;
+    transition: all 0.2s; background: #fafbff;
+  }
+  .soal input[type="text"]:focus {
+    outline: none; border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(109, 93, 252, 0.12); background: #fff;
+  }
+  .petunjuk-input { font-size: 0.82em; color: #718096; margin-top: 6px; }
+  .feedback {
+    margin-top: 10px; font-size: 0.92em; font-weight: 600;
+    padding: 10px 14px; border-radius: 10px; display: none;
+  }
+  .feedback.benar { color: #2f855a; background: #e6fffa; border-left: 4px solid #38b2ac; display: block; }
+  .feedback.salah { color: #c53030; background: #fff5f5; border-left: 4px solid #fc8181; display: block; }
+  .upload-box {
+    margin-top: 16px; background: linear-gradient(135deg, #f8f9fd, #eef1fb);
+    border: 2px dashed var(--primary); border-radius: 14px;
+    padding: 18px 20px; text-align: center;
+    transition: all 0.3s; cursor: pointer; position: relative;
+  }
+  .upload-box:hover { background: linear-gradient(135deg, #eef1fb, #e0e8ff); border-color: var(--primary-dark); }
+  .upload-box.uploaded { background: linear-gradient(135deg, #e6fffa, #d4f9ee); border-color: var(--accent); border-style: solid; }
+  .upload-box .upload-icon { font-size: 1.6em; margin-bottom: 6px; }
+  .upload-box .upload-text { font-size: 0.88em; color: #718096; font-weight: 600; }
+  .upload-box .upload-info { font-size: 0.78em; color: #a0aec0; margin-top: 4px; }
+  .upload-box input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .btn-group { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; justify-content: center; }
+  button {
+    padding: 14px 28px; border: none; border-radius: 14px;
+    font-size: 1em; font-weight: 700; cursor: pointer;
+    transition: all 0.2s; font-family: inherit;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-cek { background: var(--gradient-1); color: #fff; box-shadow: 0 6px 16px rgba(109, 93, 252, 0.35); }
+  .btn-cek:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(109, 93, 252, 0.45); }
+  .btn-kirim { background: var(--gradient-4); color: #fff; box-shadow: 0 6px 16px rgba(67, 233, 123, 0.35); }
+  .btn-kirim:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(67, 233, 123, 0.45); }
+  .btn-reset { background: #eef1fb; color: #4a5568; }
+  .btn-reset:hover { background: #e0e8ff; }
+  .skor-box {
+    display: none; margin-top: 24px; padding: 26px;
+    border-radius: 20px; background: var(--gradient-1);
+    color: #fff; text-align: center; box-shadow: var(--shadow-lg);
+  }
+  .skor-box .angka { font-size: 3em; font-weight: 800; line-height: 1; margin: 8px 0; }
+  .skor-box .label { font-size: 1em; opacity: 0.9; font-weight: 600; letter-spacing: 0.5px; }
+  .refleksi-card {
+    background: linear-gradient(135deg, #fff0f6, #ffe4ec);
+    border-left: 5px solid var(--secondary);
+    border-radius: 16px; padding: 22px; margin-bottom: 20px;
+  }
+  .refleksi-card h4 { color: #d6336c; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .refleksi-card textarea {
+    width: 100%; min-height: 100px; padding: 14px 16px;
+    border: 2px solid #ffd6e3; border-radius: 12px;
+    font-size: 1em; font-family: inherit; resize: vertical; background: #fff;
+  }
+  .refleksi-card textarea:focus {
+    outline: none; border-color: var(--secondary);
+    box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.12);
+  }
+  .checklist {
+    background: #f8f9fd; border-radius: 16px; padding: 22px;
+    border-left: 5px solid var(--accent);
+  }
+  .checklist h4 { color: #234e52; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .checklist label {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 12px; border-radius: 10px;
+    cursor: pointer; transition: background 0.2s; margin-bottom: 4px;
+  }
+  .checklist label:hover { background: #eef1fb; }
+  .checklist input[type="checkbox"] {
+    width: 20px; height: 20px; accent-color: var(--primary);
+    cursor: pointer; margin-top: 3px; flex-shrink: 0;
+  }
+  .checklist input[type="checkbox"]:checked + span { color: var(--primary-dark); font-weight: 600; }
+  .motivasi {
+    background: var(--gradient-1); color: #fff;
+    border-radius: 20px; padding: 28px; text-align: center;
+    box-shadow: var(--shadow-lg); margin-top: 20px;
+    position: relative; overflow: hidden;
+  }
+  .motivasi::before { content: "✨"; position: absolute; top: 12px; left: 20px; font-size: 1.5em; opacity: 0.5; }
+  .motivasi::after { content: "🌟"; position: absolute; bottom: 12px; right: 20px; font-size: 1.5em; opacity: 0.5; }
+  .motivasi h4 { font-size: 1.2em; margin-bottom: 12px; }
+  .motivasi p { color: #fff; font-size: 1em; line-height: 1.8; font-style: italic; }
+  .info-box {
+    background: linear-gradient(135deg, #fff9e6, #fff3cc);
+    border-left: 5px solid var(--accent-yellow);
+    border-radius: 14px; padding: 16px 20px; margin-bottom: 18px; font-size: 0.95em;
+  }
+  .info-box strong { color: #b7791f; }
+  .info-box ol { margin-top: 8px; }
+  .kirim-status {
+    display: none; margin-top: 16px; padding: 16px 20px;
+    border-radius: 14px; text-align: center;
+    font-weight: 600; font-size: 0.95em;
+  }
+  .kirim-status.sukses {
+    display: block; background: linear-gradient(135deg, #e6fffa, #d4f9ee);
+    border: 2px solid var(--accent); color: #234e52;
+  }
+  .kirim-status.gagal {
+    display: block; background: #fff5f5; border: 2px solid #fc8181; color: #c53030;
+  }
+  .kirim-status.loading {
+    display: block; background: #fff9e6; border: 2px solid var(--accent-yellow); color: #b7791f;
+  }
+  .data-siswa { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  .data-siswa input {
+    padding: 12px 16px; border: 2px solid #e8ecf7;
+    border-radius: 12px; font-size: 1em;
+    transition: all 0.2s; background: #fafbff;
+  }
+  .data-siswa input:focus {
+    outline: none; border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(109, 93, 252, 0.12); background: #fff;
+  }
+  footer { text-align: center; padding: 30px 20px; color: #718096; font-size: 0.9em; margin-top: 20px; }
+  footer strong { color: var(--primary-dark); }
+
+  /* OVERLAY SUKSES */
+  .overlay-sukses {
+    position: fixed; inset: 0; background: rgba(45, 52, 54, 0.85);
+    backdrop-filter: blur(8px); display: none;
+    align-items: center; justify-content: center;
+    z-index: 9999; padding: 20px; animation: fadeIn 0.3s ease;
+    overflow-y: auto;
+  }
+  .overlay-sukses.show { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .overlay-content {
+    background: linear-gradient(135deg, #ffffff, #f8f9fd);
+    border-radius: 30px; padding: 45px 35px;
+    max-width: 520px; width: 100%; text-align: center;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative; overflow: hidden;
+    margin: auto;
+  }
+  @keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .overlay-content::before {
+    content: ""; position: absolute; top: -100px; left: 50%;
+    transform: translateX(-50%); width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(67, 233, 123, 0.2), transparent 70%);
+    border-radius: 50%;
+  }
+  .overlay-check {
+    width: 100px; height: 100px; background: var(--gradient-4);
+    border-radius: 50%; margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3em; color: #fff;
+    box-shadow: 0 20px 50px rgba(67, 233, 123, 0.5);
+    animation: pulseCheck 1.5s infinite; position: relative;
+  }
+  @keyframes pulseCheck {
+    0%, 100% { transform: scale(1); box-shadow: 0 20px 50px rgba(67, 233, 123, 0.5); }
+    50% { transform: scale(1.08); box-shadow: 0 25px 60px rgba(67, 233, 123, 0.7); }
+  }
+  .overlay-content h2 { font-size: 1.7em; color: var(--dark); margin-bottom: 12px; position: relative; }
+  .overlay-content h2 .nama { color: var(--primary-dark); display: block; font-size: 1em; margin-top: 6px; }
+  .overlay-content p { color: #4a5568; font-size: 1em; line-height: 1.7; margin-bottom: 16px; position: relative; }
+  .overlay-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; position: relative; }
+  .overlay-stat {
+    background: linear-gradient(135deg, #f0f4ff, #e8f0ff);
+    border-radius: 14px; padding: 14px 8px;
+    border: 2px solid rgba(109, 93, 252, 0.15);
+  }
+  .overlay-stat .stat-value { font-size: 1.3em; font-weight: 800; color: var(--primary-dark); line-height: 1.2; }
+  .overlay-stat .stat-label {
+    font-size: 0.7em; color: #718096; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;
+  }
+  .overlay-content .quote {
+    background: linear-gradient(135deg, #fff9e6, #fff3cc);
+    border-left: 4px solid var(--accent-yellow);
+    border-radius: 12px; padding: 14px 18px;
+    font-style: italic; color: #b7791f;
+    font-size: 0.95em; margin: 18px 0; position: relative; text-align: left;
+  }
+  .overlay-content .btn-tutup {
+    background: var(--gradient-1); color: #fff;
+    padding: 14px 40px; border-radius: 14px;
+    font-weight: 700; font-size: 1em; border: none; cursor: pointer;
+    box-shadow: 0 10px 24px rgba(109, 93, 252, 0.4);
+    transition: all 0.2s; margin-top: 6px; position: relative;
+  }
+  .overlay-content .btn-tutup:hover { transform: translateY(-3px); box-shadow: 0 15px 32px rgba(109, 93, 252, 0.5); }
+  .btn-tally-upload {
+    display: block;
+    background: var(--gradient-4);
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1.05em;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 10px 24px rgba(67, 233, 123, 0.4);
+    transition: all 0.2s;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .btn-tally-upload:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 32px rgba(67, 233, 123, 0.5);
+  }
+  .confetti {
+    position: absolute; width: 10px; height: 10px;
+    opacity: 0; animation: confettiFall 3s ease-in-out infinite;
+  }
+  @keyframes confettiFall {
+    0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(600px) rotate(720deg); opacity: 0; }
+  }
+  .confetti:nth-child(1) { background: #ff6b9d; left: 10%; animation-delay: 0s; }
+  .confetti:nth-child(2) { background: #4ecdc4; left: 25%; animation-delay: 0.3s; }
+  .confetti:nth-child(3) { background: #ffd93d; left: 40%; animation-delay: 0.6s; }
+  .confetti:nth-child(4) { background: #667eea; left: 55%; animation-delay: 0.9s; }
+  .confetti:nth-child(5) { background: #ff9f43; left: 70%; animation-delay: 1.2s; }
+  .confetti:nth-child(6) { background: #43e97b; left: 85%; animation-delay: 1.5s; }
+
+  @media (max-width: 640px) {
+    .container { padding: 12px; }
+    .hero { padding: 35px 24px 30px; border-radius: 22px; }
+    .hero h1 { font-size: 1.6em; }
+    .hero .subtitle { font-size: 0.95em; }
+    section { padding: 24px 20px; border-radius: 20px; }
+    .section-title { font-size: 1.2em; }
+    .section-title .icon-circle { width: 40px; height: 40px; font-size: 1.1em; }
+    .rumus-kunci { font-size: 1.2em; padding: 18px; }
+    .rumus-display { font-size: 1.05em; padding: 16px 12px; gap: 8px; }
+    .bentuk-header { padding: 14px 16px; gap: 10px; }
+    .bentuk-header .judul { font-size: 0.9em; }
+    .bentuk-header .label-bentuk { font-size: 0.7em; padding: 4px 10px; }
+    .bentuk-card.open .bentuk-body { padding: 18px 16px; }
+    .btn-group button { flex: 1 1 100%; justify-content: center; }
+    .kehidupan { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .kartu { padding: 16px 12px; }
+    .kartu .emoji { font-size: 1.8em; }
+    .rangkuman-grid { grid-template-columns: 1fr; }
+    .data-siswa { grid-template-columns: 1fr; }
+    .overlay-content { padding: 30px 22px; border-radius: 24px; }
+    .overlay-content h2 { font-size: 1.4em; }
+    .overlay-check { width: 80px; height: 80px; font-size: 2.5em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-shapes">
+  <div class="shape"></div><div class="shape"></div>
+  <div class="shape"></div><div class="shape"></div>
+</div>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="badge-top">📐 MATEMATIKA KELAS 8</div>
+    <h1>Merasionalkan Bentuk Akar</h1>
+    <div class="subtitle">Pembelajaran Daring Mandiri</div>
+    <div class="info-pills">
+      <span>👩‍🏫 Zulfa Dianti, S.Pd., M.Pd., Gr.</span>
+      <span>📅 Rabu, 30 September 2026</span>
+      <span>⏰ Kondisional</span>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">0% selesai dibaca</div>
+  </div>
+
+  <!-- TUJUAN -->
+  <section>
+    <div class="section-title">
+      <span class="icon-circle">🎯</span>
+      Tujuan Pembelajaran
+    </div>
+    <p style="margin-bottom:14px;">Setelah mengikuti pembelajaran mandiri ini, peserta didik diharapkan mampu:</p>
+    <ol class="tujuan-list">
+      <li>Menjelaskan pengertian <strong>merasionalkan bentuk akar</strong> (menghilangkan bentuk akar pada penyebut pecahan).</li>
+      <li>Merasionalkan penyebut pecahan bentuk <span class="frac"><span class="num">a</span><span class="den">√b</span></span>.</li>
+      <li>Merasionalkan penyebut pecahan bentuk <span class="frac"><span class="num">a</span><span class="den">b + √c</span></span> dan <span class="frac"><span class="num">a</span><span class="den">b − √c</span></span>.</li>
+      <li>Merasionalkan penyebut pecahan bentuk <span class="frac"><span class="num">a</span><span class="den">√b + √c</span></span> dan <span class="frac"><span class="num">a</span><span class="den">√b − √c</span></span>.</li>
+      <li>Menyelesaikan masalah kontekstual yang berkaitan dengan merasionalkan bentuk akar.</li>
+    </ol>
+  </section>
+
+  <!-- MATERI -->
+  <section>
+    <div class="section-title blue">
+      <span class="icon-circle">📚</span>
+      Materi: Merasionalkan Penyebut Pecahan Bentuk Akar
+    </div>
+    <div class="materi-intro">
+      <p class="definisi">
+        Suatu pecahan yang mempunyai <strong>penyebut bentuk akar</strong> dapat diubah menjadi pecahan lain yang ekuivalen dengan <strong>penyebut berupa bilangan rasional</strong>. Proses ini disebut <strong>merasionalkan penyebut pecahan bentuk akar</strong>.
+      </p>
+      <p style="margin-top:12px;">
+        Caranya adalah dengan <strong>mengalikan pembilang dan penyebut</strong> dengan <strong>bentuk sekawan</strong> dari penyebutnya. Bentuk sekawan dipilih agar perkaliannya memanfaatkan rumus kunci berikut:
+      </p>
+    </div>
+    <div class="rumus-kunci">
+      <span class="label">🔑 Rumus Kunci</span>
+      (x + y)(x − y) = x² − y²
+    </div>
+    <p style="margin-bottom:14px;">Ada <strong>5 bentuk</strong> penyebut pecahan bentuk akar yang akan kita pelajari. Klik setiap kartu untuk membuka penjelasan rinci beserta contohnya. 👇</p>
+
+    <div class="bentuk-card" data-bentuk="a">
+      <div class="bentuk-header" onclick="toggleBentuk(this)">
+        <span class="label-bentuk">Bentuk a</span>
+        <span class="judul">Penyebut berbentuk a / √b</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="bentuk-body">
+        <p><strong>Langkah pengerjaan:</strong></p>
+        <ol class="langkah">
+          <li>Kalikan pembilang dan penyebut dengan <strong>√b</strong> (sekawan dari √b).</li>
+          <li>Gunakan sifat <strong>√b × √b = b</strong> sehingga penyebut menjadi rasional.</li>
+          <li>Sederhanakan hasilnya jika masih bisa disederhanakan.</li>
+        </ol>
+        <div class="rumus-display">
+          <span class="frac"><span class="num">a</span><span class="den">√b</span></span>
+          <span class="op">×</span>
+          <span class="frac"><span class="num">√b</span><span class="den">√b</span></span>
+          <span class="eq">=</span>
+          <span class="frac"><span class="num">a√b</span><span class="den">b</span></span>
+        </div>
+        <div class="contoh-block">
+          <div class="contoh-title">💡 Contoh Penyelesaian <span class="badge">Bentuk a</span></div>
+          <p style="margin-bottom:10px;"><strong>Rasionalkan <span class="frac"><span class="num">8</span><span class="den">√2</span></span></strong></p>
+          <div class="contoh-step"><span class="ket">Langkah 1 — Kalikan dengan sekawan √2/√2:</span>
+            <span class="frac"><span class="num">8</span><span class="den">√2</span></span> × <span class="frac"><span class="num">√2</span><span class="den">√2</span></span></div>
+          <div class="contoh-step"><span class="ket">Langkah 2 — Sederhanakan:</span>
+            = <span class="frac"><span class="num">8√2</span><span class="den">2</span></span></div>
+          <div class="contoh-step"><span class="ket">Langkah 3 — Bagi 8 dengan 2:</span>
+            = <strong>4√2</strong></div>
+          <div class="hasil-akhir">✅ Hasil akhir: 4√2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bentuk-card" data-bentuk="b">
+      <div class="bentuk-header" onclick="toggleBentuk(this)">
+        <span class="label-bentuk">Bentuk b</span>
+        <span class="judul">Penyebut berbentuk a / (b + √c)</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="bentuk-body">
+        <p><strong>Langkah pengerjaan:</strong></p>
+        <ol class="langkah">
+          <li>Kalikan pembilang dan penyebut dengan <strong>b − √c</strong> (sekawan dari b + √c).</li>
+          <li>Gunakan rumus <strong>(b + √c)(b − √c) = b² − c</strong>.</li>
+          <li>Sederhanakan pembilang dan tuliskan hasil akhirnya.</li>
+        </ol>
+        <div class="rumus-display">
+          <span class="frac"><span class="num">a</span><span class="den">b + √c</span></span>
+          <span class="op">×</span>
+          <span class="frac"><span class="num">b − √c</span><span class="den">b − √c</span></span>
+          <span class="eq">=</span>
+          <span class="frac"><span class="num">a(b − √c)</span><span class="den">b² − c</span></span>
+        </div>
+        <div class="contoh-block">
+          <div class="contoh-title">💡 Contoh Penyelesaian <span class="badge">Bentuk b</span></div>
+          <p style="margin-bottom:10px;"><strong>Rasionalkan <span class="frac"><span class="num">6</span><span class="den">3 + √3</span></span></strong></p>
+          <div class="contoh-step"><span class="ket">Langkah 1 — Sekawan dari (3 + √3) adalah (3 − √3):</span>
+            <span class="frac"><span class="num">6</span><span class="den">3 + √3</span></span> × <span class="frac"><span class="num">3 − √3</span><span class="den">3 − √3</span></span></div>
+          <div class="contoh-step"><span class="ket">Langkah 2 — Kalikan:</span>
+            = <span class="frac"><span class="num">6(3 − √3)</span><span class="den">9 − 3</span></span>
+            = <span class="frac"><span class="num">6(3 − √3)</span><span class="den">6</span></span></div>
+          <div class="contoh-step"><span class="ket">Langkah 3 — Bagi dengan 6:</span>
+            = <strong>3 − √3</strong></div>
+          <div class="hasil-akhir">✅ Hasil akhir: 3 − √3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bentuk-card" data-bentuk="c">
+      <div class="bentuk-header" onclick="toggleBentuk(this)">
+        <span class="label-bentuk">Bentuk c</span>
+        <span class="judul">Penyebut berbentuk a / (b − √c)</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="bentuk-body">
+        <p><strong>Langkah pengerjaan:</strong></p>
+        <ol class="langkah">
+          <li>Kalikan pembilang dan penyebut dengan <strong>b + √c</strong> (sekawan dari b − √c).</li>
+          <li>Gunakan rumus <strong>(b − √c)(b + √c) = b² − c</strong>.</li>
+          <li>Sederhanakan pembilang dan tuliskan hasil akhirnya.</li>
+        </ol>
+        <div class="rumus-display">
+          <span class="frac"><span class="num">a</span><span class="den">b − √c</span></span>
+          <span class="op">×</span>
+          <span class="frac"><span class="num">b + √c</span><span class="den">b + √c</span></span>
+          <span class="eq">=</span>
+          <span class="frac"><span class="num">a(b + √c)</span><span class="den">b² − c</span></span>
+        </div>
+        <div class="contoh-block">
+          <div class="contoh-title">💡 Contoh Penyelesaian <span class="badge">Bentuk c</span></div>
+          <p style="margin-bottom:10px;"><strong>Rasionalkan <span class="frac"><span class="num">2</span><span class="den">√6 − 2</span></span></strong></p>
+          <div class="contoh-step"><span class="ket">Langkah 1 — Sekawan dari (√6 − 2) adalah (√6 + 2):</span>
+            <span class="frac"><span class="num">2</span><span class="den">√6 − 2</span></span> × <span class="frac"><span class="num">√6 + 2</span><span class="den">√6 + 2</span></span></div>
+          <div class="contoh-step"><span class="ket">Langkah 2 — Kalikan:</span>
+            = <span class="frac"><span class="num">2(√6 + 2)</span><span class="den">6 − 4</span></span>
+            = <span class="frac"><span class="num">2(√6 + 2)</span><span class="den">2</span></span></div>
+          <div class="contoh-step"><span class="ket">Langkah 3 — Bagi dengan 2:</span>
+            = <strong>√6 + 2</strong></div>
+          <div class="hasil-akhir">✅ Hasil akhir: √6 + 2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bentuk-card" data-bentuk="d">
+      <div class="bentuk-header" onclick="toggleBentuk(this)">
+        <span class="label-bentuk">Bentuk d</span>
+        <span class="judul">Penyebut berbentuk a / (√b + √c)</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="bentuk-body">
+        <p><strong>Langkah pengerjaan:</strong></p>
+        <ol class="langkah">
+          <li>Kalikan pembilang dan penyebut dengan <strong>√b − √c</strong> (sekawan dari √b + √c).</li>
+          <li>Gunakan rumus <strong>(√b + √c)(√b − √c) = b − c</strong>.</li>
+          <li>Sederhanakan pembilang dan tuliskan hasil akhirnya.</li>
+        </ol>
+        <div class="rumus-display">
+          <span class="frac"><span class="num">a</span><span class="den">√b + √c</span></span>
+          <span class="op">×</span>
+          <span class="frac"><span class="num">√b − √c</span><span class="den">√b − √c</span></span>
+          <span class="eq">=</span>
+          <span class="frac"><span class="num">a(√b − √c)</span><span class="den">b − c</span></span>
+        </div>
+        <div class="contoh-block">
+          <div class="contoh-title">💡 Contoh Penyelesaian <span class="badge">Bentuk d</span></div>
+          <p style="margin-bottom:10px;"><strong>Rasionalkan <span class="frac"><span class="num">12</span><span class="den">√7 + √3</span></span></strong></p>
+          <div class="contoh-step"><span class="ket">Langkah 1 — Sekawan dari (√7 + √3) adalah (√7 − √3):</span>
+            <span class="frac"><span class="num">12</span><span class="den">√7 + √3</span></span> × <span class="frac"><span class="num">√7 − √3</span><span class="den">√7 − √3</span></span></div>
+          <div class="contoh-step"><span class="ket">Langkah 2 — Kalikan:</span>
+            = <span class="frac"><span class="num">12(√7 − √3)</span><span class="den">7 − 3</span></span>
+            = <span class="frac"><span class="num">12(√7 − √3)</span><span class="den">4</span></span></div>
+          <div class="contoh-step"><span class="ket">Langkah 3 — Bagi dengan 4:</span>
+            = <strong>3(√7 − √3)</strong></div>
+          <div class="hasil-akhir">✅ Hasil akhir: 3(√7 − √3)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bentuk-card" data-bentuk="e">
+      <div class="bentuk-header" onclick="toggleBentuk(this)">
+        <span class="label-bentuk">Bentuk e</span>
+        <span class="judul">Penyebut berbentuk a / (√b − √c)</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="bentuk-body">
+        <p><strong>Langkah pengerjaan:</strong></p>
+        <ol class="langkah">
+          <li>Kalikan pembilang dan penyebut dengan <strong>√b + √c</strong> (sekawan dari √b − √c).</li>
+          <li>Gunakan rumus <strong>(√b − √c)(√b + √c) = b − c</strong>.</li>
+          <li>Sederhanakan pembilang dan tuliskan hasil akhirnya.</li>
+        </ol>
+        <div class="rumus-display">
+          <span class="frac"><span class="num">a</span><span class="den">√b − √c</span></span>
+          <span class="op">×</span>
+          <span class="frac"><span class="num">√b + √c</span><span class="den">√b + √c</span></span>
+          <span class="eq">=</span>
+          <span class="frac"><span class="num">a(√b + √c)</span><span class="den">b − c</span></span>
+        </div>
+        <div class="contoh-block">
+          <div class="contoh-title">💡 Contoh Penyelesaian <span class="badge">Bentuk e</span></div>
+          <p style="margin-bottom:10px;"><strong>Rasionalkan <span class="frac"><span class="num">10</span><span class="den">√5 − √2</span></span></strong></p>
+          <div class="contoh-step"><span class="ket">Langkah 1 — Sekawan dari (√5 − √2) adalah (√5 + √2):</span>
+            <span class="frac"><span class="num">10</span><span class="den">√5 − √2</span></span> × <span class="frac"><span class="num">√5 + √2</span><span class="den">√5 + √2</span></span></div>
+          <div class="contoh-step"><span class="ket">Langkah 2 — Kalikan:</span>
+            = <span class="frac"><span class="num">10(√5 + √2)</span><span class="den">5 − 2</span></span>
+            = <span class="frac"><span class="num">10(√5 + √2)</span><span class="den">3</span></span></div>
+          <div class="contoh-step"><span class="ket">Langkah 3 — Tuliskan paling sederhana:</span>
+            = <strong><span class="frac"><span class="num">10</span><span class="den">3</span></span>(√5 + √2)</strong></div>
+          <div class="hasil-akhir">✅ Hasil akhir: (10/3)(√5 + √2)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PEMANFAATAN -->
+  <section>
+    <div class="section-title green">
+      <span class="icon-circle">🌍</span>
+      Pemanfaatan dalam Kehidupan Sehari-hari
+    </div>
+    <div class="kehidupan">
+      <div class="kartu"><span class="emoji">🏗️</span><h4>Teknik & Konstruksi</h4><p>Menghitung diagonal rangka baja, kemiringan atap, dan jarak antar titik pada denah bangunan agar presisi.</p></div>
+      <div class="kartu"><span class="emoji">📡</span><h4>Teknologi & Sinyal</h4><p>Perhitungan kekuatan sinyal, impedansi listrik, dan frekuensi gelombang yang melibatkan bentuk akar.</p></div>
+      <div class="kartu"><span class="emoji">🗺️</span><h4>Navigasi & Geografi</h4><p>Menghitung jarak terpendek antar lokasi dengan rumus Pythagoras yang menghasilkan bentuk akar.</p></div>
+      <div class="kartu"><span class="emoji">💰</span><h4>Keuangan & Bisnis</h4><p>Analisis rasio, indeks harga, dan bunga majemuk yang melibatkan akar untuk laporan yang rapi.</p></div>
+    </div>
+  </section>
+
+  <!-- RANGKUMAN -->
+  <section class="rangkuman-section">
+    <div class="section-title blue">
+      <span class="icon-circle">📝</span>
+      Rangkuman
+    </div>
+    <div class="rangkuman-intro">
+      <strong>💡 Inti materi:</strong> Merasionalkan bentuk akar = menghilangkan akar pada penyebut pecahan dengan mengalikan <em>bentuk sekawan</em>.
+    </div>
+    <div class="rumus-kunci">
+      <span class="label">🔑 Rumus Kunci</span>
+      (x + y)(x − y) = x² − y²
+    </div>
+    <p style="margin: 20px 0 12px; font-weight: 700; color: var(--dark);">📌 Rumus Tiap Bentuk:</p>
+    <div class="rangkuman-grid">
+      <div class="rangkuman-item"><strong>Bentuk a: a / √b</strong>
+        <div class="rumus-display" style="margin: 10px 0 0; padding: 14px 10px; font-size: 1.05em;">
+          <span class="frac"><span class="num">a</span><span class="den">√b</span></span>
+          <span class="op">×</span>
+          <span class="frac"><span class="num">√b</span><span class="den">√b</span></span>
+          <span class="eq">=</span>
+          <span class="frac"><span class="num">a√b</span><span class="den">b</span></span>
+        </div>
+      </div>
+      <div class="rangkuman-item"><strong>Bentuk b: a / (b + √c)</strong>
+        <div class="rumus-display" style="margin: 10px 0 0; padding: 14px 10px; font-size: 1em;">
+          <span class="frac"><span class="num">a</span><span class="den">b+√c</span></span>
+          <span class="op">×</span>
+          <span class="frac"><span class="num">b−√c</span><span class="den">b−√c</span></span>
+          <span class="eq">=</span>
+          <span class="frac"><span class="num">a(b−√c)</span><span class="den">b²−c</span></span>
+        </div>
+      </div>
+      <div class="rangkuman-item"><strong>Bentuk c: a / (b − √c)</strong>
+        <div class="rumus-display" style="margin: 10px 0 0; padding: 14px 10px; font-size: 1em;">
+          <span class="frac"><span class="num">a</span><span class="den">b−√c</span></span>
+          <span class="op">×</span>
+          <span class="frac"><span class="num">b+√c</span><span class="den">b+√c</span></span>
+          <span class="eq">=</span>
+          <span class="frac"><span class="num">a(b+√c)</span><span class="den">b²−c</span></span>
+        </div>
+      </div>
+      <div class="rangkuman-item"><strong>Bentuk d: a / (√b + √c)</strong>
+        <div class="rumus-display" style="margin: 10px 0 0; padding: 14px 10px; font-size: 1em;">
+          <span class="frac"><span class="num">a</span><span class="den">√b+√c</span></span>
+          <span class="op">×</span>
+          <span class="frac"><span class="num">√b−√c</span><span class="den">√b−√c</span></span>
+          <span class="eq">=</span>
+          <span class="frac"><span class="num">a(√b−√c)</span><span class="den">b−c</span></span>
+        </div>
+      </div>
+      <div class="rangkuman-item"><strong>Bentuk e: a / (√b − √c)</strong>
+        <div class="rumus-display" style="margin: 10px 0 0; padding: 14px 10px; font-size: 1em;">
+          <span class="frac"><span class="num">a</span><span class="den">√b−√c</span></span>
+          <span class="op">×</span>
+          <span class="frac"><span class="num">√b+√c</span><span class="den">√b+√c</span></span>
+          <span class="eq">=</span>
+          <span class="frac"><span class="num">a(√b+√c)</span><span class="den">b−c</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATIHAN -->
+  <section>
+    <div class="section-title orange">
+      <span class="icon-circle">✏️</span>
+      Latihan Pemahaman
+    </div>
+    <div class="info-box">
+      <strong>📌 Petunjuk Pengerjaan:</strong>
+      <ol>
+        <li>Kerjakan setiap soal <strong>di buku tulis</strong> dengan langkah-langkah lengkap.</li>
+        <li>Tuliskan <strong>jawaban akhir</strong> di kolom yang tersedia, lalu klik <strong>Cek Jawaban</strong>.</li>
+        <li>Setelah semua soal selesai, lanjut ke <strong>Refleksi & Penutup</strong>, lalu <strong>Pengumpulan Tugas</strong>.</li>
+        <li>Data jawaban akan otomatis masuk ke Google Sheet guru. Setelah itu, <strong>upload foto</strong> pekerjaanmu lewat Tally.</li>
+      </ol>
+    </div>
+
+    <div class="data-siswa">
+      <input type="text" id="namaSiswa" placeholder="Nama Lengkap *">
+      <input type="text" id="kelasSiswa" placeholder="Kelas (contoh: 8A) *">
+    </div>
+
+    <div id="daftarSoal"></div>
+
+    <div class="btn-group">
+      <button class="btn-cek" onclick="cekSemua()">🔍 Cek Jawaban</button>
+      <button class="btn-reset" onclick="resetSemua()">🔄 Reset</button>
+    </div>
+
+    <div class="skor-box" id="skorBox">
+      <div class="label">🏆 SKOR KAMU</div>
+      <div class="angka" id="skorAngka">0</div>
+      <div class="label" id="skorPesan"></div>
+    </div>
+  </section>
+
+  <!-- REFLEKSI & PENUTUP -->
+  <section>
+    <div class="section-title pink">
+      <span class="icon-circle">🪞</span>
+      Refleksi & Penutup
+    </div>
+    <div class="refleksi-card">
+      <h4>💭 Refleksi Diri</h4>
+      <p style="margin-bottom: 10px; color: #4a5568;">Tuliskan apa yang sudah kamu pahami dan apa yang masih sulit hari ini:</p>
+      <textarea id="refleksiText" placeholder="Contoh: Saya sudah paham cara merasionalkan bentuk a/√b, tapi masih bingung untuk bentuk a/(√b + √c)..."></textarea>
+    </div>
+    <div class="checklist">
+      <h4>✅ Checklist Penguasaan Materi</h4>
+      <p style="margin-bottom: 10px; color: #4a5568;">Centang poin yang sudah kamu kuasai:</p>
+      <label><input type="checkbox" id="ck1"><span>Saya dapat menjelaskan pengertian merasionalkan bentuk akar</span></label>
+      <label><input type="checkbox" id="ck2"><span>Saya dapat merasionalkan bentuk a/√b</span></label>
+      <label><input type="checkbox" id="ck3"><span>Saya dapat merasionalkan bentuk a/(b + √c) dan a/(b − √c)</span></label>
+      <label><input type="checkbox" id="ck4"><span>Saya dapat merasionalkan bentuk a/(√b + √c) dan a/(√b − √c)</span></label>
+      <label><input type="checkbox" id="ck5"><span>Saya dapat menerapkan merasionalkan bentuk akar pada masalah kontekstual</span></label>
+    </div>
+    <div class="motivasi" style="margin-top: 22px;">
+      <h4>🌟 Motivasi Penutup</h4>
+      <p>"Matematika bukan tentang angka, tetapi tentang cara berpikir. Setiap langkah yang kamu tuliskan adalah bukti bahwa kamu sedang tumbuh menjadi pemikir yang hebat. Teruslah berlatih, karena kamu lebih hebat dari yang kamu kira!" 💪</p>
+    </div>
+    <p style="text-align: center; margin-top: 22px; color: #718096; font-size: 0.95em;">
+      Jika ada pertanyaan, silakan tulis di kolom komentar/forum kelas ya! 📩
+    </p>
+  </section>
+
+  <!-- PENGUMPULAN TUGAS -->
+  <section>
+    <div class="section-title green">
+      <span class="icon-circle">📤</span>
+      Pengumpulan Tugas
+    </div>
+    <div class="info-box" style="background: linear-gradient(135deg, #e6fffa, #d4f9ee); border-left-color: var(--accent);">
+      <strong style="color: #234e52;">✨ Dua Langkah Terakhir:</strong>
+      <ol style="color: #2c7a7b; margin-top: 8px;">
+        <li><strong>Klik tombol hijau di bawah</strong> → data jawabanmu langsung masuk ke guru.</li>
+        <li>Setelah muncul notifikasi sukses, <strong>klik tombol "Upload Foto via Tally"</strong> untuk upload 5 foto pekerjaanmu.</li>
+      </ol>
+    </div>
+    <div style="text-align: center; padding: 20px 0;">
+      <button class="btn-kirim" onclick="kirimKeGuru()" style="font-size: 1.1em; padding: 18px 40px; border-radius: 16px;">
+        📤 Kirim Semua Jawaban ke Guru
+      </button>
+      <p style="margin-top: 14px; font-size: 0.85em; color: #718096;">Data jawaban otomatis masuk ke Google Sheet guru. Foto diupload di Tally.</p>
+    </div>
+    <div class="kirim-status" id="kirimStatus"></div>
+  </section>
+
+  <footer>
+    <strong>Matematika Kelas 8 — Merasionalkan Bentuk Akar</strong><br>
+    Guru: Zulfa Dianti, S.Pd., M.Pd., Gr. &nbsp;|&nbsp; Rabu, 30 September 2026
+  </footer>
+</div>
+
+<!-- OVERLAY SUKSES dengan TOMBOL TALLY -->
+<div class="overlay-sukses" id="overlaySukses">
+  <div class="overlay-content">
+    <div class="confetti"></div><div class="confetti"></div>
+    <div class="confetti"></div><div class="confetti"></div>
+    <div class="confetti"></div><div class="confetti"></div>
+    
+    <div class="overlay-check">✓</div>
+    <h2>Selamat, Kamu Berhasil! 🎉
+      <span class="nama" id="overlayNama">—</span>
+    </h2>
+    <p>Jawaban, refleksi, dan checklist kamu sudah terkirim ke guru. <strong>Satu langkah lagi!</strong></p>
+    
+    <div class="overlay-stats">
+      <div class="overlay-stat"><div class="stat-value" id="statSkor">0</div><div class="stat-label">Skor</div></div>
+      <div class="overlay-stat"><div class="stat-value" id="statJawab">0/5</div><div class="stat-label">Terjawab</div></div>
+      <div class="overlay-stat"><div class="stat-value" id="statCeklist">0/5</div><div class="stat-label">Checklist</div></div>
+    </div>
+
+    <div class="quote" style="background: linear-gradient(135deg, #e6fffa, #d4f9ee); border-left-color: #4ecdc4; color: #234e52; font-style: normal;">
+      📷 <strong>Langkah Terakhir:</strong> Upload foto pekerjaanmu (5 foto) di form Tally. Klik tombol di bawah untuk membuka.
+    </div>
+
+    <a href="https://tally.so/r/kdMeKr" target="_blank" rel="noopener" class="btn-tally-upload">
+      📷 Upload Foto Pekerjaan via Tally
+    </a>
+
+    <button class="btn-tutup" onclick="tutupOverlay()" style="background: #eef1fb; color: #4a5568; box-shadow: none;">
+      Tutup
+    </button>
+
+    <p style="font-size: 0.85em; color: #718096; margin-top: 14px;">
+      Sudah upload foto? Terima kasih, tugasmu <strong>selesai</strong>! ✅
+    </p>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   KONFIGURASI GOOGLE SHEETS — URL Web App Anda
+   ============================================================ */
+const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbxng4AcPp5YIVDB7zTg7FZokcyuhnNr8Jo9JBJURk8jLgLv2lAEGn1Vni8P9uh_jLoY/exec";
+
+const LINK_TALLY = "https://tally.so/r/kdMeKr";
+
+/* ====== BANK SOAL ====== */
+const bankSoal = [
+  { pertanyaan: "Rasionalkan bentuk <span class='frac'><span class='num'>8</span><span class='den'>√2</span></span>",
+    kunci: ["4√2"], tampilKunci: "8/√2 × √2/√2 = 8√2/2 = 4√2" },
+  { pertanyaan: "Rasionalkan bentuk <span class='frac'><span class='num'>10</span><span class='den'>√5</span></span>",
+    kunci: ["2√5"], tampilKunci: "10/√5 × √5/√5 = 10√5/5 = 2√5" },
+  { pertanyaan: "Rasionalkan bentuk <span class='frac'><span class='num'>6</span><span class='den'>3 + √3</span></span>",
+    kunci: ["3(3-√3)", "9-3√3", "3-√3"], tampilKunci: "6/(3+√3) × (3-√3)/(3-√3) = 6(3-√3)/6 = 3-√3" },
+  { pertanyaan: "Rasionalkan bentuk <span class='frac'><span class='num'>12</span><span class='den'>√7 + √3</span></span>",
+    kunci: ["3(√7-√3)", "3√7-3√3"], tampilKunci: "12/(√7+√3) × (√7-√3)/(√7-√3) = 12(√7-√3)/4 = 3(√7-√3)" },
+  { pertanyaan: "Rasionalkan bentuk <span class='frac'><span class='num'>10</span><span class='den'>√5 − √2</span></span>",
+    kunci: ["10/3(√5+√2)", "(10√5+10√2)/3", "10(√5+√2)/3"],
+    tampilKunci: "10/(√5-√2) × (√5+√2)/(√5+√2) = 10(√5+√2)/3" }
+];
+
+/* ====== RENDER SOAL (tanpa upload lokal) ====== */
+const daftarSoal = document.getElementById('daftarSoal');
+bankSoal.forEach((soal, i) => {
+  const div = document.createElement('div');
+  div.className = 'soal';
+  div.innerHTML = `
+    <div class="soal-num"><span class="num-circle">${i+1}</span>Soal ${i+1}</div>
+    <div class="soal-pertanyaan">${soal.pertanyaan}</div>
+    <label>Jawaban Akhir <span class="wajib">*</span></label>
+    <input type="text" id="jawab${i}" placeholder="Tulis jawaban akhirmu di sini...">
+    <div class="petunjuk-input">Contoh: 4√2 &nbsp;|&nbsp; 3(3-√3) &nbsp;|&nbsp; 3√7-3√3</div>
+    <div class="feedback" id="fb${i}"></div>
+  `;
+  daftarSoal.appendChild(div);
+});
+
+/* ====== TOGGLE ACCORDION ====== */
+function toggleBentuk(header) { header.parentElement.classList.toggle('open'); }
+document.querySelector('.bentuk-card').classList.add('open');
+
+/* ====== NORMALISASI ====== */
+function normalisasi(str) {
+  return str.toLowerCase().replace(/\s+/g, '').replace(/−/g, '-').replace(/–/g, '-').replace(/×/g, '*');
+}
+
+/* ====== CEK JAWABAN ====== */
+function cekSemua() {
+  let benar = 0;
+  bankSoal.forEach((soal, i) => {
+    const input = document.getElementById('jawab' + i);
+    const fb = document.getElementById('fb' + i);
+    const jawabUser = normalisasi(input.value.trim());
+    if (jawabUser === '') {
+      fb.className = 'feedback salah';
+      fb.textContent = '⚠️ Jawaban akhir belum diisi.';
+      return;
+    }
+    const cocok = soal.kunci.some(k => normalisasi(k) === jawabUser);
+    if (cocok) {
+      benar++;
+      fb.className = 'feedback benar';
+      fb.textContent = '✅ Jawaban benar!';
+      input.style.borderColor = '#38a169';
+    } else {
+      fb.className = 'feedback salah';
+      fb.textContent = '❌ Belum tepat. Kunci: ' + soal.tampilKunci;
+      input.style.borderColor = '#e53e3e';
+    }
+  });
+  const skor = Math.round((benar / bankSoal.length) * 100);
+  document.getElementById('skorAngka').textContent = skor;
+  document.getElementById('skorPesan').textContent =
+    skor === 100 ? '🎉 Sempurna! Kamu sudah paham!' :
+    skor >= 60 ? '👍 Bagus! Periksa kembali soal yang salah.' :
+    '💪 Ayo pelajari kembali materinya.';
+  document.getElementById('skorBox').style.display = 'block';
+  document.getElementById('skorBox').scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ====== RESET ====== */
+function resetSemua() {
+  bankSoal.forEach((soal, i) => {
+    document.getElementById('jawab' + i).value = '';
+    document.getElementById('jawab' + i).style.borderColor = '#e8ecf7';
+    document.getElementById('fb' + i).className = 'feedback';
+    document.getElementById('fb' + i).textContent = '';
+  });
+  document.getElementById('skorBox').style.display = 'none';
+}
+
+/* ============================================================
+   KIRIM KE GOOGLE SHEETS — FORMDATA
+   ============================================================ */
+function kirimKeGuru() {
+  const status = document.getElementById('kirimStatus');
+  const nama = document.getElementById('namaSiswa').value.trim();
+  const kelas = document.getElementById('kelasSiswa').value.trim();
+  const refleksi = document.getElementById('refleksiText').value.trim();
+
+  if (!nama || !kelas) {
+    status.className = 'kirim-status gagal';
+    status.textContent = '❌ Mohon isi Nama dan Kelas terlebih dahulu.';
+    status.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('namaSiswa').focus();
+    return;
+  }
+  if (refleksi.length < 5) {
+    status.className = 'kirim-status gagal';
+    status.textContent = '❌ Mohon isi Refleksi Diri terlebih dahulu (minimal 5 karakter).';
+    status.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('refleksiText').focus();
+    return;
+  }
+
+  const jawabanArr = [];
+  bankSoal.forEach((soal, i) => {
+    const j = document.getElementById('jawab' + i).value.trim() || '-';
+    jawabanArr.push('Soal' + (i+1) + ': ' + j);
+  });
+  const jawabanGabung = jawabanArr.join(' | ');
+
+  const checklist = [];
+  if (document.getElementById('ck1').checked) checklist.push('Pengertian');
+  if (document.getElementById('ck2').checked) checklist.push('Bentuk a');
+  if (document.getElementById('ck3').checked) checklist.push('Bentuk b/c');
+  if (document.getElementById('ck4').checked) checklist.push('Bentuk d/e');
+  if (document.getElementById('ck5').checked) checklist.push('Kontekstual');
+  const checklistStr = checklist.length ? checklist.join(', ') : '-';
+
+  const skor = document.getElementById('skorAngka').textContent || '0';
+  let jawabCount = 0;
+  bankSoal.forEach((soal, i) => {
+    if (document.getElementById('jawab' + i).value.trim() !== '') jawabCount++;
+  });
+  let ceklistCount = checklist.length;
+
+  status.className = 'kirim-status loading';
+  status.textContent = '⏳ Mengirim data ke guru...';
+  status.scrollIntoView({ behavior: 'smooth' });
+
+  const formData = new FormData();
+  formData.append('nama', nama);
+  formData.append('kelas', kelas);
+  formData.append('skor', skor);
+  formData.append('jawaban', jawabanGabung);
+  formData.append('refleksi', refleksi);
+  formData.append('checklist', checklistStr);
+
+  fetch(URL_SCRIPT, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: formData
+  })
+  .then(() => { tampilkanSukses(status, nama, kelas, skor, jawabCount, ceklistCount); })
+  .catch(() => { tampilkanSukses(status, nama, kelas, skor, jawabCount, ceklistCount); });
+}
+
+function tampilkanSukses(status, nama, kelas, skor, jawabCount, ceklistCount) {
+  status.className = 'kirim-status sukses';
+  status.innerHTML = '✅ <strong>Berhasil!</strong> Data kamu sudah terkirim ke guru.';
+
+  document.getElementById('overlayNama').textContent = nama + ' (' + kelas + ')';
+  document.getElementById('statSkor').textContent = skor;
+  document.getElementById('statJawab').textContent = jawabCount + '/5';
+  document.getElementById('statCeklist').textContent = ceklistCount + '/5';
+
+  document.getElementById('overlaySukses').classList.add('show');
+}
+
+function tutupOverlay() {
+  document.getElementById('overlaySukses').classList.remove('show');
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+/* ====== PROGRESS BAR ====== */
+window.addEventListener('scroll', function() {
+  const total = document.body.scrollHeight - window.innerHeight;
+  const scrolled = window.scrollY;
+  const persen = total > 0 ? Math.min(100, Math.round((scrolled / total) * 100)) : 0;
+  document.getElementById('progressFill').style.width = persen + '%';
+  document.getElementById('progressLabel').textContent = persen + '% selesai dibaca';
+});
+</script>
+</body>
+</html>
